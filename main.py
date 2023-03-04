@@ -15,7 +15,9 @@ class RandomUser:
         Returns:
             list: lsit of users
         '''
-        pass
+        d={"results":n}
+        r=requests.get(self.url,params=d).json()
+        return r["results"]
     
     def get_user_by_gender(self, gender: str) -> dict:
         '''return specify whether only male or only female users generated.\
@@ -27,7 +29,9 @@ class RandomUser:
         Returns:
             str: user
         '''
-        pass
+        d={"gender":gender}
+        r=requests.get(self.url,params=d).json()
+        return r["results"]["gender"]
     
     def get_users_by_gender(self, n: int, gender: str) -> dict:
         '''return specify whether only male or only female users generated.\
@@ -40,7 +44,9 @@ class RandomUser:
         Returns:
             str: user
         '''
-        pass
+        d={"gender":gender}
+        r=requests.get(self.url,params=d).json()
+        return r["results"]["gender"]
     
     def get_user_by_nat(self, nat: str) -> dict:
         '''get user nationality from randomuser
@@ -51,7 +57,8 @@ class RandomUser:
         Returns:
             str: user
         '''
-        pass
+        d={"nat":nat}
+        return requests.get(self.url,params=d)
     
     def get_users_by_nat(self, n: int, nat: str) -> dict:
         '''get user nationality from randomuser
@@ -77,19 +84,12 @@ class RandomUser:
         Returns:
             dict: data
         '''
-        pass
+        d={}
+        j=1
+        for i in self.get_randomusers():
+            d.setdefault(f'user{j}',i)
+            j+=1
+            
+        return d[field]
     
-    def get_users_specific_field(self, n: int, field: str) -> list:
-        '''get user specific field from randomuser
-
-        Note:
-            including fields: gender, name, location, email, login, registered, dob, phone, cell, id, picture, nat
-
-        Args:
-            n (int): number of users
-            field (str): specific field
-        
-        Returns:
-            lsit: list of user data
-        '''
-        pass
+    
